@@ -1,23 +1,19 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import useFetch from "../../Hook/usefetch";
-import CapsuleCard from "@/app/components/Cards/Capsules";
 import useAutoHoverScroll from "@/app/Hook/useAutoScroll";
+import Card from "@/app/components/Cards/Card";
 
 const Capsules = () => {
   const { data, error, loading } = useFetch("capsules");
   const scrollRef = useRef(null);
 
-
-
-  
   useAutoHoverScroll(scrollRef, {
     scrollSpeed: 2,
     scrollZoneHeight: 100,
     intervalDelay: 10,
-    trigger: data, 
+    trigger: data,
   });
-
 
   if (loading) return <p className="text-center text-gray-500">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
@@ -31,7 +27,7 @@ const Capsules = () => {
       <div
         ref={scrollRef}
         style={{
-          height: "570px",
+          height: "550px",
           padding: "10px",
           overflowY: "hidden",
           borderRadius: "8px",
@@ -41,7 +37,12 @@ const Capsules = () => {
         className="flex flex-col gap-6 "
       >
         {data.map((item) => (
-          <CapsuleCard key={item.capsule_serial} item={item} />
+          // <CapsuleCard key={item.capsule_serial} item={item} />
+          <Card
+            key={`capsule-${item.capsule_serial}`}
+            data={item}
+            type="capsule"
+          />
         ))}
       </div>
     </div>

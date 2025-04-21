@@ -1,8 +1,8 @@
 "use client";
 import React, { useRef } from "react";
 import useFetch from "../../Hook/usefetch";
-import HistoryCard from "@/app/components/Cards/History";
 import useAutoHoverScroll from "@/app/Hook/useAutoScroll";
+import Card from "@/app/components/Cards/Card";
 
 const History = () => {
   const { data, error, loading } = useFetch("history");
@@ -27,7 +27,7 @@ const History = () => {
         ref={scrollRef}
         className="flex flex-col gap-6"
         style={{
-          height: "570px",
+          height: "550px",
           padding: "10px",
           overflowY: "hidden",
           borderRadius: "8px",
@@ -35,7 +35,11 @@ const History = () => {
         }}
       >
         {data.map((item) => (
-          <HistoryCard key={item.id} item={item} />
+          <Card
+          key={`history-${item.title}`}
+          data={item}
+          type="history"
+        />
         ))}
       </div>
     </div>

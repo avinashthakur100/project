@@ -1,9 +1,9 @@
 "use client";
 import React,{useRef ,useState,useCallback} from "react";
 import useFetch from "../../Hook/usefetch";
-import LaunchCard from "@/app/components/Cards/Launches";
 import useAutoHoverScroll from "@/app/Hook/useAutoScroll";
 import useInfiniteScroll from "@/app/Hook/useInfiniteScroll";
+import Card from "@/app/components/Cards/Card";
 
 const Launches = () => {
 
@@ -42,7 +42,7 @@ const Launches = () => {
         ref={scrollRef}
         className="flex flex-col gap-6"
         style={{
-          height: "570px",
+          height: "550px",
           padding: "10px",
           overflowY: "hidden",
           borderRadius: "8px",
@@ -50,8 +50,13 @@ const Launches = () => {
         }}
       >
         {data.slice(0, visibleCount).map((launch) => (
-          <LaunchCard key={launch.mission_name} launch={launch} />
+          <Card
+          key={`history-${launch.mission_name}`}
+          data={launch}
+          type="launch"
+        />
         ))}
+        
         <div ref={loadMoreRef} style={{ height: "1px" }} />
       </div>
     </div>

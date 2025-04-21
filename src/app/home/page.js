@@ -7,7 +7,11 @@ import History from './components/History';
 
 const page = () => {
   return (
-    <div className="bg-black min-h-screen p-6">
+    <div className="bg-black min-h-screen ">
+      <div className='text-white text-5xl text-center font-black '> Space X
+
+      </div>
+     
     <div className="grid grid-cols-3 gap-14 w-full">
       {/* Left Column */}
       <div>

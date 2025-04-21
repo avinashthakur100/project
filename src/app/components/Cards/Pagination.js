@@ -10,7 +10,6 @@ const Pagination = ({ data, itemsPerPage, onPageChange }) => {
     onPageChange(data.slice(start, end)); 
   }, [currentPage, data, itemsPerPage, onPageChange]);
 
- 
   const getPageNumbers = () => {
     const totalVisible = 5; 
     let start = Math.max(1, currentPage - Math.floor(totalVisible / 2)); 
