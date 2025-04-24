@@ -1,52 +1,33 @@
 "use client";
 import React from "react";
 import useFetch from "../Hook/usefetch";
+import Table from "../components/Cards/Table";
 
-const page = () => {
-  const { data, error, loading } = useFetch("capsules");
-  console.log(data);
+
+const CapsulePage = () => {
+  const { data } = useFetch("capsules");
+
+  const cols = [
+    { title: "Capsule Serial", render: (item) => item.capsule_serial },
+    { title: "Capsule ID", render: (item) => item.capsule_id },
+    { title: "Status", render: (item) => item.status },
+    { title: "Original Launch", render: (item) => item.original_launch },
+    { title: "Launch Unix", render: (item) => item.original_launch_unix },
+    {
+      title: "Mission Name",
+      render: (item) => item.missions?.[0]?.name ?? "avinash",
+    },
+    {
+      title: "Flight",
+      render: (item) => item.missions?.[0]?.flight ?? "-",
+    },
+  ];
 
   return (
-    <div className="bg-black h-screen w-screen mx-0">
-      <table className=" w-[1300px] bg-blue-100 border-collapse mx-30">
-        <thead>
-          <tr>
-            <th className="text-center border "></th>
-            <th className="text-center border"></th>
-            <th className="text-center border"></th>
-            <th className="text-center border"></th>
-            <th className="text-center border"></th>
-            <th colSpan="2" className="text-center border">
-              Mission
-            </th>
-          </tr>
-          <tr>
-            <th className="text-center border">Capsule Serial</th>
-            <th className="text-center border">Capsule ID</th>
-            <th className="text-center border">Status</th>
-            <th className="text-center border">Original Launch</th>
-            <th className="text-center border">Launch Unix</th>
-            <th className="text-center border">Name</th>
-            <th className="text-center border">Flight</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item) => (
-            <tr key={item.capsule_serial}>
-              <td className="text-center border">{item.capsule_serial}</td>
-              <td className="text-center border">{item.capsule_id}</td>
-              <td className="text-center border">{item.status}</td>
-              <td className="text-center border">{item.original_launch}</td>
-              <td className="text-center border">{item.original_launch_unix}</td>
-              <td className="text-center border">{ item.missions[0]?.name ?? 'avinash'}</td>
-              <td className="text-center border">{ item.missions[0]?.flight}</td>
-              {/* {console.log(item.missions[0].name) && null} */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className=" min-h-screen">
+      <Table cols={cols} data={data} />
     </div>
   );
 };
 
-export default page;
+export default CapsulePage;
